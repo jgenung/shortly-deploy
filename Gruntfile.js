@@ -1,8 +1,14 @@
 module.exports = function(grunt) {
-
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';'
+      },
+      dist: {
+        src: ['public/**/*.js'],
+        dest: 'public/client/short-deploy.js'
+      }
     },
 
     mochaTest: {
@@ -21,11 +27,16 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      build: {
+        src: 'public/client/short-deploy.js',
+        dest: 'public/client/short-deploy-min.js'
+      }
     },
 
     jshint: {
       files: [
         // Add filespec list here
+        'public/client/*.js'
       ],
       options: {
         force: 'true',
@@ -38,6 +49,10 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
+      minify: {
+          src: 'public/style.css',
+          dest: 'public/style.min.css'
+        }
     },
 
     watch: {
@@ -59,6 +74,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command: 'git push azure master'
       }
     },
   });
@@ -94,11 +110,14 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'concat', 'uglify'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
       // add your production server task here
+      // 'shell'
+       grunt.task.run([ 'shell' ]);
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
@@ -106,6 +125,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'jshint', 'test', 'build', 'upload'
   ]);
 
 
