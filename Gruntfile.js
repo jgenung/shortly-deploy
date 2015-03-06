@@ -6,8 +6,12 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: ['public/**/*.js'],
-        dest: 'public/client/short-deploy.js'
+        src: ['public/client/*.js'],
+        dest: 'public/dist/short-deploy.js'
+      },
+      lib: {
+        src: ['public/lib/*.js'],
+        dest: 'public/dist/lib.js'
       }
     },
 
@@ -28,8 +32,12 @@ module.exports = function(grunt) {
 
     uglify: {
       build: {
-        src: 'public/client/short-deploy.js',
-        dest: 'public/client/short-deploy-min.js'
+        src: 'public/dist/short-deploy.js',
+        dest: 'public/dist/short-deploy-min.js'
+      },
+      lib: {
+        src: 'public/dist/lib.js',
+        dest: 'public/dist/lib.min.js'
       }
     },
 
@@ -51,7 +59,7 @@ module.exports = function(grunt) {
     cssmin: {
       minify: {
           src: 'public/style.css',
-          dest: 'public/style.min.css'
+          dest: 'public/dist/style.min.css'
         }
     },
 
@@ -89,7 +97,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-nodemon');
 
   grunt.registerTask('server-dev', function (target) {
-    // Running nodejs in a different process and displaying output on the main console
     var nodemon = grunt.util.spawn({
          cmd: 'grunt',
          grunt: true,
@@ -106,17 +113,16 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
+    'jshint',
     'mochaTest'
   ]);
 
   grunt.registerTask('build', [
-    'concat', 'uglify'
+    'concat', 'uglify', 'cssmin'
   ]);
 
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
-      // add your production server task here
-      // 'shell'
        grunt.task.run([ 'shell' ]);
     } else {
       grunt.task.run([ 'server-dev' ]);
@@ -124,9 +130,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    // add your deploy tasks here
-    'jshint', 'test', 'build', 'upload'
+    'test', 'build', 'upload'
   ]);
-
 
 };
