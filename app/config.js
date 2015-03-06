@@ -6,7 +6,7 @@ var connectionString = process.env.CUSTOMCONNSTR_MONGOLAB_URI || 'mongodb://loca
 //var db = mongoose.createConnection(connectionString);
 //var db = mongoose.connection;
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(connectionString);
 var db = mongoose.connection;
 db.on('error', console.error);
 
