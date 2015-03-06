@@ -23,11 +23,13 @@ window.Shortly = Backbone.View.extend({
 
   renderIndexView: function(e){
     e && e.preventDefault();
+    console.log('index');
     this.router.navigate('/', { trigger: true });
   },
 
   renderCreateView: function(e){
     e && e.preventDefault();
+    console.log('create');
     this.router.navigate('/create', { trigger: true });
   },
 
