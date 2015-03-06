@@ -1,14 +1,15 @@
 <script id='layout' type='text/x-handlebars-template'>
   <div class='navigation'>
   <ul>
-    <li><a href='#' class='index'>All Links</a></li>
-    <li><a href='#' class='create'>Shorten</a></li>
+    <!--<li><a href='#' class='index'>All Links</a></li>
+    <li><a href='#' class='create'>Shorten</a></li>-->
+    <li><a href='/links' class='index'>All Links</a></li>
+    <li><a href='/create' class='create'>Shorten</a></li>
   </ul>
     <a href='/logout' class='logout'>Logout</a>
   </div>
   <div id='container'></div>
 </script>
-
 
 <script id='link' type='text/x-handlebars-template'>
   <img src='/redirect_icon.png'/>
@@ -19,7 +20,6 @@
     <a href='{{base_url}}/{{code}}'>{{base_url}}/{{code}}</a>
   </div>
 </script>
-
 
 <script id='create' type='text/x-handlebars-template'>
   <form>
@@ -50,4 +50,4 @@
 <script src='/client/linkView.js'></script>
 <script src='/client/linksView.js'></script>
 <script src='/client/createLinkView.js'></script>
-<script src='/client/router.js'></script> -->
+<script src='/client/router.js'></script>-->
