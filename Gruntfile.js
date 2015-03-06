@@ -8,11 +8,11 @@ module.exports = function(grunt) {
       dist: {
         src: ['public/client/*.js'],
         dest: 'public/dist/short-deploy.js'
-      },
-      lib: {
+      }
+      /*lib: {
         src: ['public/lib/*.js'],
         dest: 'public/dist/lib.js'
-      }
+      }*/
     },
 
     mochaTest: {
@@ -34,11 +34,11 @@ module.exports = function(grunt) {
       build: {
         src: 'public/dist/short-deploy.js',
         dest: 'public/dist/short-deploy-min.js'
-      },
-      lib: {
-        src: 'public/dist/lib.js',
-        dest: 'public/dist/lib.min.js'
       }
+      // lib: {
+      //   src: 'public/dist/lib.js',
+      //   dest: 'public/dist/lib.min.js'
+      // }
     },
 
     jshint: {
